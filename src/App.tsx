@@ -24,6 +24,8 @@ const App = () => (
           <Route path="/marketplace" element={<NotFound />} />
           <Route path="/categories/:categoryId" element={<NotFound />} />
           <Route path="/become-seller" element={<NotFound />} />
+          <Route path="/about" element={<NotFound />} />
+          <Route path="/contact" element={<NotFound />} />
           {/* Catch-all route */}
           <Route path="*" element={<NotFound />} />
         </Routes>
