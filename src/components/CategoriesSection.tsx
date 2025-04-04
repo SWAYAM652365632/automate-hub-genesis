@@ -7,6 +7,8 @@ import {
   Chrome, 
   Sparkles 
 } from "lucide-react";
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
+import { useNavigate } from "react-router-dom";
 
 // Category data
 const categories = [
@@ -62,28 +64,47 @@ const categories = [
 
 // Category card component
 const CategoryCard = ({ category }: { category: (typeof categories)[0] }) => {
+  const navigate = useNavigate();
   const Icon = category.icon;
   
+  const handleClick = () => {
+    navigate(category.url);
+  };
+  
   return (
-    <a 
-      href={category.url}
-      className="flex flex-col items-center p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md hover-card text-center"
-    >
-      <div className={`w-16 h-16 rounded-full flex items-center justify-center bg-gradient-to-br ${category.color} text-white mb-4`}>
-        <Icon className="h-8 w-8" />
-      </div>
-      <h3 className="text-lg font-bold mb-1">{category.title}</h3>
-      <p className="text-sm text-gray-600 dark:text-gray-300">{category.description}</p>
-    </a>
+    <HoverCard>
+      <HoverCardTrigger asChild>
+        <div 
+          onClick={handleClick}
+          className="flex flex-col items-center p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md transition-all duration-300 hover:shadow-lg hover:translate-y-[-5px] cursor-pointer text-center"
+        >
+          <div className={`w-16 h-16 rounded-full flex items-center justify-center bg-gradient-to-br ${category.color} text-white mb-4`}>
+            <Icon className="h-8 w-8" />
+          </div>
+          <h3 className="text-lg font-bold mb-1">{category.title}</h3>
+          <p className="text-sm text-gray-600 dark:text-gray-300">{category.description}</p>
+        </div>
+      </HoverCardTrigger>
+      <HoverCardContent className="w-80">
+        <div className="flex justify-between space-x-4">
+          <div>
+            <h4 className="text-sm font-semibold">{category.title}</h4>
+            <p className="text-sm text-muted-foreground">
+              Click to browse all {category.title.toLowerCase()}
+            </p>
+          </div>
+        </div>
+      </HoverCardContent>
+    </HoverCard>
   );
 };
 
 const CategoriesSection = () => {
   return (
-    <section className="section-padding">
+    <section className="py-16 md:py-24">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="mb-4">Browse By Category</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Browse By Category</h2>
           <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             Find the perfect tools for your specific needs in our organized categories
           </p>

@@ -12,9 +12,9 @@ const Index = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      <main>
+      <main className="flex-1">
         <HeroSection />
-        <Separator />
+        <Separator className="my-0" />
         <FeaturedProducts />
         <CategoriesSection />
         <WhyChooseUs />
