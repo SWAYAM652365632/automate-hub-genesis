@@ -7,6 +7,11 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import ProductDetails from "./pages/ProductDetails";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import Marketplace from "./pages/Marketplace";
+import CategoryPage from "./pages/CategoryPage";
+import BecomeSeller from "./pages/BecomeSeller";
 
 const queryClient = new QueryClient();
 
@@ -18,15 +23,12 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
-          {/* Implemented routes */}
           <Route path="/products/:productId" element={<ProductDetails />} />
-          {/* Placeholder routes - these would be implemented with actual pages */}
-          <Route path="/marketplace" element={<NotFound />} />
-          <Route path="/categories/:categoryId" element={<NotFound />} />
-          <Route path="/become-seller" element={<NotFound />} />
-          <Route path="/about" element={<NotFound />} />
-          <Route path="/contact" element={<NotFound />} />
-          {/* Catch-all route */}
+          <Route path="/marketplace" element={<Marketplace />} />
+          <Route path="/categories/:categoryId" element={<CategoryPage />} />
+          <Route path="/become-seller" element={<BecomeSeller />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
