@@ -2,18 +2,18 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Moon, Sun, Menu, X, ChevronDown, LogIn, ShoppingCart } from "lucide-react";
+import { Menu, X, ChevronDown, LogIn, ShoppingCart } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import ThemeSwitcher from "@/components/ThemeSwitcher";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [theme, setTheme] = useState<"light" | "dark">("light");
   const location = useLocation();
 
   // Handle scroll event to change navbar background
@@ -29,13 +29,6 @@ const Navbar = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  // Toggle theme
-  const toggleTheme = () => {
-    const newTheme = theme === "light" ? "dark" : "light";
-    setTheme(newTheme);
-    document.documentElement.classList.toggle("dark");
-  };
 
   // Toggle mobile menu
   const toggleMobileMenu = () => {
@@ -59,7 +52,7 @@ const Navbar = () => {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm shadow-md"
+          ? "bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm shadow-md theme-purple:bg-purple-900/80 theme-blue:bg-blue-900/80 theme-green:bg-green-900/80"
           : "bg-transparent"
       }`}
     >
@@ -88,32 +81,32 @@ const Navbar = () => {
               <button className="flex items-center font-medium hover:text-primary transition-colors">
                 Categories <ChevronDown className="ml-1 h-4 w-4" />
               </button>
-              <div className="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+              <div className="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-gray-800 theme-purple:bg-purple-800 theme-blue:bg-blue-800 theme-green:bg-green-800 ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                 <div className="py-1">
                   <Link
                     to="/categories/automation-scripts"
-                    className="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700"
+                    className="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 theme-purple:hover:bg-purple-700 theme-blue:hover:bg-blue-700 theme-green:hover:bg-green-700"
                     onClick={closeMenu}
                   >
                     Automation Scripts
                   </Link>
                   <Link
                     to="/categories/saas-tools"
-                    className="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700"
+                    className="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 theme-purple:hover:bg-purple-700 theme-blue:hover:bg-blue-700 theme-green:hover:bg-green-700"
                     onClick={closeMenu}
                   >
                     SaaS Tools
                   </Link>
                   <Link
                     to="/categories/ai-tools"
-                    className="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700"
+                    className="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 theme-purple:hover:bg-purple-700 theme-blue:hover:bg-blue-700 theme-green:hover:bg-green-700"
                     onClick={closeMenu}
                   >
                     AI Tools
                   </Link>
                   <Link
                     to="/categories/chrome-extensions"
-                    className="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700"
+                    className="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 theme-purple:hover:bg-purple-700 theme-blue:hover:bg-blue-700 theme-green:hover:bg-green-700"
                     onClick={closeMenu}
                   >
                     Chrome Extensions
@@ -143,13 +136,7 @@ const Navbar = () => {
 
           {/* Right side icons */}
           <div className="hidden md:flex items-center space-x-4">
-            <Button variant="ghost" size="icon" onClick={toggleTheme}>
-              {theme === "light" ? (
-                <Moon className="h-5 w-5" />
-              ) : (
-                <Sun className="h-5 w-5" />
-              )}
-            </Button>
+            <ThemeSwitcher />
             <Button variant="outline">
               <LogIn className="mr-2 h-4 w-4" /> Login
             </Button>
@@ -244,21 +231,9 @@ const Navbar = () => {
                   Sign Up
                 </Button>
               </div>
-              <Button
-                variant="ghost"
-                className="justify-start pl-0"
-                onClick={toggleTheme}
-              >
-                {theme === "light" ? (
-                  <>
-                    <Moon className="mr-2 h-5 w-5" /> Dark Mode
-                  </>
-                ) : (
-                  <>
-                    <Sun className="mr-2 h-5 w-5" /> Light Mode
-                  </>
-                )}
-              </Button>
+              <div className="flex justify-center py-2">
+                <ThemeSwitcher />
+              </div>
             </nav>
           </div>
         )}
